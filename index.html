@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Answers Test Experience by 8</title>
+    <link rel="stylesheet" type="text/css" href="https://assets.sitescdn.net/answers/v1.10/answers.css" />
+    <style>
+        .answers-layout {
+            max-width: 50rem;
+            margin: auto;
+        }
+
+    </style>
+    <script src="https://assets.sitescdn.net/answers/v1.10/answers.min.js"></script>
+</head>
+
+<body>
+    <div class="answers-layout">
+        <div class="search-bar"></div>
+        <div class="spell-check"></div>
+        <div class="direct-answer"></div>
+        <div class="universal-results"></div>
+        <div class="location-bias"></div>
+    </div>
+</body>
+
+<script>
+  function initAnswers() {
+    ANSWERS.init({
+      apiKey: "a1fffec1429574f139d4515d36121c49",
+      experienceKey: "zendesk-answer",
+      businessId: "3732884",
+      experienceVersion: "PRODUCTION",
+      onReady: function () {
+        this.addComponent("SearchBar", {
+            container: ".search-bar",
+            placeholderText: "知りたいことを聞かせてね!"
+        });
+        this.addComponent("SpellCheck", {
+            container: ".spell-check"
+        });
+        this.addComponent("DirectAnswer", {
+            container: ".direct-answer"
+        });
+        this.addComponent("UniversalResults", {
+            container: ".universal-results"
+        });
+        this.addComponent("LocationBias", {
+            container: ".location-bias"
+        });
+      }
+    });
+  }
+</script>
+
+<script src="https://assets.sitescdn.net/answers/v1.5/answers.min.js" onload="ANSWERS.domReady(initAnswers)" async defer></script>
+
+</html>

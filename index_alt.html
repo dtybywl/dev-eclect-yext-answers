@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="https://assets.sitescdn.net/answers-search-bar/v1.0/answers.css" />
+  <script src="https://assets.sitescdn.net/answers-search-bar/v1.0/answerstemplates.compiled.min.js"></script>
+  <script>
+    function initAnswers() {
+      ANSWERS.init({
+        apiKey: "a1fffec1429574f139d4515d36121c49",
+        experienceKey: "zendesk-answer",
+        experienceVersion: "PRODUCTION",
+        locale: "ja",
+        businessId: "3732884",
+        templateBundle: TemplateBundle.default,
+        onReady: function () {
+          ANSWERS.addComponent("SearchBar", {
+            container: ".search_form",
+            name: "search-bar",
+            redirectUrl: "",
+            placeholderText: "知りたいことを教えてね!"
+          });
+        }
+      });
+    }
+  </script>
+  <script src="https://assets.sitescdn.net/answers-search-bar/v1.0/answers.min.js"
+    onload="ANSWERS.domReady(initAnswers)" async defer></script>
+</head>
+
+<body>
+  <!-- Search Form -->
+  <div class="search_form"></div>
+
+  <!-- Overlay --> 
+  <script type="text/javascript" async src="https://answers.yext.com/overlay.js"></script>
+  <script>
+    window.YxtAnswersOverlaySettings = {
+      domain: "{{production_url}}",
+      button: {
+        alignment: 'right',
+        color: {
+          background: '#808080',
+          text: '#FFFFFF'
+        },
+      },
+      panel: {
+        header: "ご質問は何かしら?",
+        subtitle: "よくある質問や我々のリソースからご案内します",
+        color: {
+          background: '#808080', 
+          text: '#FFFFFF'
+        },
+      },
+      prompts: [
+        { text: "Locations near me" },
+        { text: "Do you have gift cards?" },
+        { text: "Operations & COVID-19" },
+        { text: "How do I log in?" }
+      ]
+    };
+  </script>
+
+</body>
+
+</html>
