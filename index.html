@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Yext Answers Test Experience 0.2.0 by 8</title>
+  <title>Yext Answers Test Experience 0.5.7 by 8</title>
   <link rel="stylesheet" type="text/css" href="https://assets.sitescdn.net/answers/v1/answers.css" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Pacifico&display=swap');
@@ -17,8 +17,8 @@
     header, footer {
       height: 200px;
       content: "";
-      background-image: url("16.svg");
-      background-repeat: repeat;
+      /* background-image: url("16.svg");
+      background-repeat: repeat; */
     }
     .answers-layout {
       margin: 5em auto 10em;
@@ -38,8 +38,8 @@
     }
     .search-bar-wrapper h2 {
       margin: 0 0 2em;
-      font-family: 'Pacifico', cursive;
-      font-size: 1.2em;
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 1.5em;
       font-weight: 400;
       text-align: center;
     }
@@ -79,17 +79,17 @@
   <div class="answers-layout">
     <div class="search-bar-wrapper">
       <h1>Yext Answers <em>Test</em> Experience</h1>
-      <h2>Hi, Answers Search UI SDK!</h2>
+      <h2>Universal Search Results</h2>
       <div class="navigation"></div>
       <div class="search-bar"></div>
     </div>
 
     <div class="filters-and-results-layout">
-      <div class="facets"></div>
+      <!-- <div class="facets"></div> -->
       <div class="results-layout">
         <div class="spell-check"></div>
-        <div class="vertical-results"></div>
-        <div class="pagination"></div>
+        <div class="universal-results"></div>
+        <!-- <div class="pagination"></div> -->
         <div class="location-bias"></div>
       </div>
     </div>
@@ -112,13 +112,6 @@
       experienceVersion: "PRODUCTION",
       debug: true,
       locale: "ja",
-      useTemplates: true,
-      templateBundle: false,
-      // verticalKey: "helps",
-      search: {
-        defaultInitialSearch: "",
-        verticalKey: "helps"
-      },
       verticalPages: [{
           label: "すべて",
           url: "index.html",
@@ -130,7 +123,7 @@
           label: "ヘルプ",
           url: "helps.html",
           verticalKey: "helps",
-          icon: "person",
+          icon: "support",
           isFirst: false,
           isActive: false,
           hideInNavigation: false
@@ -148,7 +141,7 @@
           label: "場所",
           url: "locations.html",
           verticalKey: "locations",
-          icon: "pin",
+          icon: "office",
           isFirst: false,
           isActive: false,
           hideInNavigation: false
@@ -158,8 +151,7 @@
         this.addComponent("SearchBar", {
           container: ".search-bar",
           placeholderText: "知りたいことを聞かせてね 😘",
-          allowEmptySearch: true,
-          verticalKey: "helps"
+          allowEmptySearch: true
         });
         this.addComponent("Navigation", {
           container: ".navigation",
@@ -168,63 +160,103 @@
           overflowLabel: "More",
           overflowIcon: null
         });
-        this.addComponent("Facets", {
-          container: ".facets",
-          verticalKey: "helps",
-          title: "フィルター",
-          showCount: true,
-          searchOnChange: true,
-          resetFacet: false,
-          resetFacetLabel: "リセット",
-          resetFacets: false,
-          resetFacetsLabel: "すべてリセット",
-          showMore: true,
-          showMoreLimit: 20,
-          showMoreLabel: "もっと",
-          showLessLabel: "少なく",
-          expand: false,
-          showNumberApplied: true,
-          applyLabel: "適用"
-        });
         this.addComponent("SpellCheck", {
           container: ".spell-check"
         });
-        this.addComponent("VerticalResults", {
-          container: ".vertical-results",
-          showAppliedFilters: true,
-          showFieldNames: true,
-          showResultsCount: true,
-          card: {
-            cardType: "Standard",
-            dataMappings: {
-              title: (item) => item.name,
-              subtitle: "",
-              details: (item) => item.body,
-              image: (item) =>
-                !item.c_advisorPhoto ? null : item.c_advisorPhoto.image.url,
-              url: (item) => item.landingPageUrl,
-              showMoreLimit: 100,
-              showMoreText: "もっと",
-              showLessText: "少なく",
-              target: "_blank"
+        this.addComponent("UniversalResults", {
+          container: ".universal-results",
+          config: {
+            helps: {
+              icon: "support",
+              card: {
+                cardType: "Standard",
+                dataMappings: {
+                  title: (item) => item.name,
+                  subtitle: "",
+                  details: (item) => item.body,
+                  image: (item) =>
+                    !item.c_advisorPhoto ? null : item.c_advisorPhoto.image.url,
+                  url: (item) => item.landingPageUrl,
+                  showMoreLimit: 100,
+                  showMoreText: "もっと",
+                  showLessText: "少なく",
+                  target: "_blank"
+                },
+                callsToAction: () => [],
+              },
             },
-            callsToAction: () => [],
-          },
-          noResults: {
-            displayAllResults: false,
-            template: tmplNoResults
-          },
-          appliedFilters: {
-            show: true,
-            removable: true
+            events: {
+              icon: "calendar",
+              card: {
+                cardType: "Standard",
+                dataMappings: {
+                  title: (item) => `${item.name}`,
+                  subtitle: (item) => `時間: ${item.time.start}- | 場所: ${item.venueName} (${item.address.region}${item.address.city}${item.address.line1} ${item.address.line2})`,
+                  details: (item) => item.body,
+                  image: (item) => item.photoGallery ? item.photoGallery[0].image.url : "",
+                  url: (item) => item.landingPageUrl,
+                  showMoreLimit: 100,
+                  showMoreText: "もっと",
+                  showLessText: "少なく",
+                  target: "_blank"
+                },
+                callsToAction: [
+                  {
+                    label: "Get Ticket",
+                    icon: "calendar",
+                    url: (item) => `tel:${item.c_primaryCTA.link}`,
+                    analyticsEventType: "CTA_CLICK",
+                    target: "_self",
+                  },
+                  {
+                    label: "Call Us",
+                    icon: "phone",
+                    url: (item) => `tel:${item.c_secondaryCTA.link}`,
+                    analyticsEventType: "TAP_TO_CALL",
+                  },
+                ],
+              },
+            },
+            locations: {
+              icon: "office",
+              card: {
+                cardType: "Standard",
+                dataMappings: {
+                  title: (item) => item.name,
+                  subtitle: (item) => `${item.address.region}${item.address.city}${item.address.line1} ${item.address.line2}`,
+                  details: (item) => item.description,
+                  image: (item) => item.photoGallery ? item.photoGallery[0].image.url : "",
+                  url: (item) => item.landingPageUrl,
+                  showMoreLimit: 100,
+                  showMoreText: "もっと",
+                  showLessText: "少なく",
+                  target: "_blank"
+                },
+                callsToAction: [
+                  {
+                    label: "Email Us",
+                    icon: "calendar",
+                    url: (item) => `mailto:${item.emails}`,
+                    analyticsEventType: "CTA_CLICK",
+                    target: "_self",
+                  },
+                  {
+                    label: "Call Us",
+                    icon: "phone",
+                    url: (item) => `tel:${item.mainPhone}`,
+                    analyticsEventType: "TAP_TO_CALL",
+                  },
+                ],
+              },
+            },
           },
           onMount: function(data) {
             console.log(data);
           }
         });
-        this.addComponent("Pagination", {
-          container: ".pagination"
-        });
+        // this.addComponent("Pagination", {
+        //   container: ".pagination"
+        // });
         this.addComponent("LocationBias", {
           container: ".location-bias"
         });

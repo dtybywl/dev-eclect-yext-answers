@@ -1,7 +1,271 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head></head>
-  <body>
-    <h1>催し物</h1>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>催し物 | Yext Answers Test Experience 0.5.7 by 8</title>
+  <link rel="stylesheet" type="text/css" href="https://assets.sitescdn.net/answers/v1/answers.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Pacifico&display=swap');
+    body {
+      margin: 0 0;
+      padding: 0 0;
+      background-color: #fff;
+    }
+    header, footer {
+      height: 200px;
+      content: "";
+      /* background-image: url("16.svg");
+      background-repeat: repeat; */
+    }
+    .answers-layout {
+      margin: 5em auto 10em;
+      max-width: 70rem;
+      font-size: 1.15em;
+    }
+    .search-bar-wrapper h1 {
+      margin: 2em 0 0.25em;
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 3.23em;
+      font-weight: 400;
+      text-align: center;
+    }
+    .search-bar-wrapper h1 a {
+      text-decoration: none;
+      color: #000;
+    }
+    .search-bar-wrapper h1 em {
+      font-style: normal;
+      color: deeppink;
+    }
+    .search-bar-wrapper h2 {
+      margin: 0 0 2em;
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 1.5em;
+      font-weight: 400;
+      text-align: center;
+    }
+    .search-bar-wrapper h2 em {
+      font-style: normal;
+      color: var(--yxt-color-brand-primary);
+    }
+    .search-bar-wrapper .navigation {
+      margin: 1em 0;
+    }
+    .yxt-Nav-container {
+      padding-bottom: 0.25em;
+      border-bottom-width: 1px;
+    }
+    .Icon--yext_animated_forward svg {
+      display: none;
+    }
+    .yxt-StandardCard-titleLink {
+      /* color: deeppink; */
+    }
+    .filters-and-results-layout {
+      display: flex;
+      margin: 2em 0;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .facets {
+      flex-basis: auto;
+    }
+    .yxt-Facets-container {
+      padding: 0 1.5625rem 0 0;
+    }
+    .results-layout {
+      width: 100%;
+    }
+    .pagination {
+      margin: 1em 0;
+    }
+  </style>
+  <script src="https://assets.sitescdn.net/answers/v1/answers.min.js"></script>
+  <script src="tmplNoResults.js"></script>
+</head>
+
+<body>
+  <header>
+
+  </header>
+
+  <div class="answers-layout">
+    <div class="search-bar-wrapper">
+      <h1>
+        <a href="https://dev-eclect-yext-answers-search-by-8.s3.ap-northeast-1.amazonaws.com/index.html">
+          Yext Answers <em>Test</em> Experience
+        </a>
+      </h1>
+      <h2>Vertical Search Results of <em>Events</em></h2>
+      <div class="navigation"></div>
+      <div class="search-bar"></div>
+    </div>
+
+    <div class="filters-and-results-layout">
+      <div class="facets"></div>
+      <div class="results-layout">
+        <div class="spell-check"></div>
+        <div class="vertical-results"></div>
+        <div class="pagination"></div>
+        <div class="location-bias"></div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <footer>
+
+  </footer>
+</body>
+
+<script>
+  function initAnswers() {
+    ANSWERS.init({
+      apiKey: "a1fffec1429574f139d4515d36121c49",
+      experienceKey: "zendesk-answer",
+      businessId: "3732884",
+      experienceVersion: "PRODUCTION",
+      debug: true,
+      locale: "ja",
+      useTemplates: true,
+      templateBundle: false,
+      search: {
+        defaultInitialSearch: "",
+        verticalKey: "events"
+      },
+      verticalPages: [{
+          label: "すべて",
+          url: "index.html",
+          isFirst: true,
+          isActive: false,
+          icon: "star"
+        },
+        {
+          label: "ヘルプ",
+          url: "helps.html",
+          verticalKey: "helps",
+          icon: "support",
+          isFirst: false,
+          isActive: false,
+          hideInNavigation: false
+        },
+        {
+          label: "催し物",
+          url: "events.html",
+          verticalKey: "events",
+          icon: "calendar",
+          isFirst: false,
+          isActive: true,
+          hideInNavigation: false
+        },
+        {
+          label: "場所",
+          url: "locations.html",
+          verticalKey: "locations",
+          icon: "office",
+          isFirst: false,
+          isActive: false,
+          hideInNavigation: false
+        }
+      ],
+      onReady: function () {
+        this.addComponent("SearchBar", {
+          container: ".search-bar",
+          placeholderText: "知りたいことを聞かせてね 😘",
+          allowEmptySearch: true,
+          verticalKey: "events"
+        });
+        this.addComponent("Navigation", {
+          container: ".navigation",
+          mobileOverflowBehavior: "COLLAPSE",
+          ariaLabel: "Search Page Navigation",
+          overflowLabel: "More",
+          overflowIcon: null
+        });
+        this.addComponent("Facets", {
+          container: ".facets",
+          verticalKey: "events",
+          title: "フィルター",
+          searchable: true,
+          showCount: true,
+          searchOnChange: false,
+          resetFacetLabel: "リセット",
+          resetFacetsLabel: "すべてリセット",
+          showMore: true,
+          showMoreLimit: 2,
+          showMoreLabel: "もっと",
+          showLessLabel: "少なく",
+          expand: true,
+          showNumberApplied: true,
+          applyLabel: "適用"
+        });
+        this.addComponent("SpellCheck", {
+          container: ".spell-check"
+        });
+        this.addComponent("VerticalResults", {
+          container: ".vertical-results",
+          verticalKey: "events",
+          showAppliedFilters: true,
+          showFieldNames: true,
+          showResultsCount: true,
+          card: {
+            cardType: "Standard",
+            dataMappings: {
+              title: (item) => `${item.name}`,
+              subtitle: (item) => `時間: ${item.time.start}- | 場所: ${item.venueName} (${item.address.region}${item.address.city}${item.address.line1} ${item.address.line2})`,
+              details: (item) => item.body,
+              image: (item) => item.photoGallery ? item.photoGallery[0].image.url : "",
+              url: (item) => item.landingPageUrl,
+              showMoreLimit: 100,
+              showMoreText: "もっと",
+              showLessText: "少なく",
+              target: "_blank"
+            },
+            callsToAction: [
+              {
+                label: "Get Ticket",
+                icon: "calendar",
+                url: (item) => `tel:${item.c_primaryCTA.link}`,
+                analyticsEventType: "CTA_CLICK",
+                target: "_self",
+              },
+              {
+                label: "Call Us",
+                icon: "phone",
+                url: (item) => `tel:${item.c_secondaryCTA.link}`,
+                analyticsEventType: "TAP_TO_CALL",
+              },
+            ],
+          },
+          noResults: {
+            displayAllResults: false,
+            template: tmplNoResults
+          },
+          appliedFilters: {
+            show: true,
+            removable: true
+          },
+          onMount: function(data) {
+            console.log(data);
+          }
+        });
+        this.addComponent("Pagination", {
+          container: ".pagination"
+        });
+        this.addComponent("LocationBias", {
+          container: ".location-bias"
+        });
+      }
+    });
+  }
+</script>
+
+<script src="https://assets.sitescdn.net/answers/v1.5/answers.min.js" onload="ANSWERS.domReady(initAnswers)" async defer></script>
+
 </html>
